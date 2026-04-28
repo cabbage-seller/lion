@@ -27,6 +27,7 @@ export default {
     methods: {
       login() {
         console.log(this.email, this.password)
+        this.$router.push("/main");
       }
     }
 

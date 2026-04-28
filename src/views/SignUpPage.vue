@@ -9,13 +9,13 @@
        <InputField type="password" placeholder="비밀번호" v-model="password" errorMsg="비밀번호를 입력하세요"/>
        <InputField type="password" placeholder="비밀번호 확인" v-model="passwordConfirm" />
         <span v-if="!isPasswordMatch && passwordConfirm" class="error-message">비밀번호가 일치하지 않습니다.</span>
-
        <button class="button" @click="signup">회원가입</button>
   </div>
+
 </template>
 
 <script>
-import InputField from '@/components/InputField.vue'
+import InputField from '@/components/InputField.vue';
 export default {
     name: "SignUpPage",
     components: { InputField },
@@ -35,7 +35,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 .title {
   margin-top: 10px;
   margin-bottom: 10px;
