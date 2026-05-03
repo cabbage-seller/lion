@@ -1,8 +1,5 @@
 import { defineStore } from "pinia"
-
-export const useFeedStore = defineStore('feed',{
-    state: () => ({
-        feedData: [
+const testData = [
             { id: 11, content: "코딩은 재밌어!", user: { id: 12, name: "테스터" } },
             { id: 10, content: "JS 디버깅 중…", user: { id: 12, name: "테스터" } },
             { id: 9, content: "커피 한 잔의 여유...", user: { id: 13, name: "다미장" } },
@@ -12,20 +9,18 @@ export const useFeedStore = defineStore('feed',{
             { id: 3, content: "디버깅만 몇 시간째…", user: { id: 11, name: "user" } },
             { id: 2, content: "아침 커피로 하루 시작", user: { id: 11, name: "user" } },
             { id: 1, content: "오늘도 멋진 하루 되세요!", user: { id: 11, name: "user" } }
-        ]
+];
+
+export const useFeedStore = defineStore('feed',{
+    state: () => ({
+        feedData: []
     }),
-    getters: {
-        getFeedListLength: (state) => state.feedData.length,
-    },
     actions: {
         getFeedData() {
+            this.feedData = testData
         },
-        removeFirstItem() {
-            this.FeedList.shift()
-        },
-        removeLastItem() {
-            this.FeedList.pop()
+        removeFeed(id) {
+            this.feedData = this.feedData.filter(feed => feed.id !== id);
         }
     }
-}
-)
+});
