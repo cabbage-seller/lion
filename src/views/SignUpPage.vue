@@ -9,12 +9,13 @@
        <InputField type="password" placeholder="비밀번호" v-model="password" errorMsg="비밀번호를 입력하세요"/>
        <InputField type="password" placeholder="비밀번호 확인" v-model="passwordConfirm" />
         <span v-if="!isPasswordMatch && passwordConfirm" class="error-message">비밀번호가 일치하지 않습니다.</span>
-       <button class="button" @click="signup">회원가입</button>
+       <button class="button" @click="signUp">회원가입</button>
   </div>
 
 </template>
 
 <script>
+import { api } from '@/api';
 import InputField from '@/components/InputField.vue';
 export default {
     name: "SignUpPage",
@@ -26,6 +27,30 @@ export default {
             password: '',
             passwordConfirm: ''
         }
+    },
+    methods: {
+      async signUp() {
+        if(!this.email || !this.name || !this.password ) {
+        alert('모든 필드를 입력해주세요.')
+        return
+        }
+        if(!this.isPasswordMatch) {
+          alert('비밀벊노가 일치하지 않습니다.')
+          return
+        }
+        try{
+          const response = await api.post("/users", {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          })
+          console.log("회원가입 성공:" + response.data)
+          this.$router.push("/")
+        }catch(error) {
+          console.error("회원가입 실패:", error)
+          alert("회원가입 실패")
+        }
+      }
     },
     computed: {
         isPasswordMatch() {
